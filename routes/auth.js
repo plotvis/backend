@@ -19,6 +19,7 @@ function exists(query) {
 
 // POST /auth/login
 var login = function(req, res) {
+  console.log(req.body);
   if (exists(req.body.email) && exists(req.body.password)) {
     UserModel.findOne({email: req.body.email}, function(err, user) {
       if(!user) {
