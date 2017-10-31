@@ -2,7 +2,6 @@ var express         = require('express');
 var app             = express();
 var bodyParser      = require('body-parser');
 var cors            = require('cors');
-var logger          = require('morgan');
 var config          = require('./config');
 var mongoose        = require('mongoose');
 var cluster         = require('cluster');
@@ -22,7 +21,10 @@ if (cluster.isMaster) {
    */
   app.use(cors());
 
-  if (process.env.NODE_ENV !== 'production') app.use(logger('dev'));
+  if (process.env.NODE_ENV !== 'production') {
+    var logger = require('morgan');
+    app.use(logger('dev'));
+  }
 
   /* Body Parser
    * Parses incoming requests and puts them in the req.body
