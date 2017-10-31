@@ -21,7 +21,8 @@ if (cluster.isMaster) {
    * Allows for external services to make API requests
    */
   app.use(cors());
-  app.use(logger('dev'));
+
+  if (process.env.NODE_ENV !== 'production') app.use(logger('dev'));
 
   /* Body Parser
    * Parses incoming requests and puts them in the req.body
