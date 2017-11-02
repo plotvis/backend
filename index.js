@@ -33,9 +33,7 @@ if (cluster.isMaster) {
    app.use(bodyParser.urlencoded({ extended: false }));
    app.use(bodyParser.json());
 
-  mongoose.connect(config.mongodbUrl, {
-    useMongoClient: true
-  });
+  mongoose.connect(config.mongodbUrl);
 
 
   /* External Routes
