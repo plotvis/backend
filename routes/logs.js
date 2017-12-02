@@ -99,19 +99,30 @@ const parse = function(path, userId, cb) {
   });
 }
 
-const all = function(req, res) {
-  console.log(req.query);
+const filtered = function(req, res) {
   FlightModel.find({user: req.decoded._id, projectReference: req.query.projectReference, placeName: req.query.placeName}, function(err, docs) {
     res.json({success: true, logs: docs});
   });
-  // FlightModel.find({user: req.decoded._id}, function(err, docs) {
-  //   res.json({success: true, logs: docs});
-  // });
 }
+const all = function(req, res) {
+  FlightModel.find({user: req.decoded._id}, function(err, docs) {
+    res.json({success: true, logs: docs});
+  });
+}
+const one = function(req, res) {
+  console.log("HITTING ONE");
+  FlightModel.findOne({user: req.decoded._id, _id: req.params.id}, function(err, log) {
+    res.json({success: true, log: log || {}});
+  });
+}
+
+
 
 const functions = {
     upload: upload,
-    all: all
+    filtered: filtered,
+    all: all,
+    one: one
 };
 
 module.exports = functions;

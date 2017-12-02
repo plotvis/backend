@@ -33,7 +33,9 @@ var multer = require('multer');
 var upload = multer({ dest: 'uploads/' });
 
 router.post('/logs/upload', upload.single('csv'), logs.upload);
-router.get('/logs', logs.all);
+router.get('/logs', logs.filtered);
+router.get('/logs/all', logs.all);
+router.get('/logs/:id', logs.one);
 
 const graph = require('./graphs');
 router.get('/graphData/places', graph.places);
