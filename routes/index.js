@@ -35,5 +35,10 @@ var upload = multer({ dest: 'uploads/' });
 router.post('/logs/upload', upload.single('csv'), logs.upload);
 router.get('/logs', logs.all);
 
+const graph = require('./graphs');
+router.get('/graphData/places', graph.places);
+router.get('/graphData/projects/', graph.project);
+router.get('/graphData/uniques', graph.uniques);
+
 
 module.exports = router;

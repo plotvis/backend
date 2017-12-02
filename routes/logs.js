@@ -100,9 +100,13 @@ const parse = function(path, userId, cb) {
 }
 
 const all = function(req, res) {
-  FlightModel.find({user: req.decoded._id}, function(err, docs) {
+  console.log(req.query);
+  FlightModel.find({user: req.decoded._id, projectReference: req.query.projectReference, placeName: req.query.placeName}, function(err, docs) {
     res.json({success: true, logs: docs});
   });
+  // FlightModel.find({user: req.decoded._id}, function(err, docs) {
+  //   res.json({success: true, logs: docs});
+  // });
 }
 
 const functions = {

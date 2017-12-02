@@ -75,6 +75,7 @@ var verifyToken = function(req, res, next) {
     var token = req.header('token');
    //  con/sole.log(token);
     // decode token
+    console.log(token);
     if (token) {
         // verifies secret and checks exp
         jwt.verify(token, config.secret, function(err, decoded) {
